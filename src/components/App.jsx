@@ -1,48 +1,44 @@
-import Food from "./Food";
+import { useRef, useState } from 'react';
+import data from '../models/foods';
+import Food from './Food';
 
 function App() {
-  const foods = [
-    {
-    name: "Hamburguer",
-    image: "img/hamburguer.jpg"
-    },
-    {
-    id: 2,
-    name: 'Sanduíche',
-    image: 'img/Sanduiche.jpg',
-    },
-    {
-    id: 3,
-    name: 'Milk Shake',
-    image: 'img/Milk_shake.jpeg',
-    },
-    {
-    id: 4,
-    name: 'Suco',
-    image: 'img/suco.jpg',
-    },
-  ]
+  const [foods, setFoods] = useState(data);
+  const buttonAdd = useRef(null);
 
+  const handleClick = () => {
+    const food = {
+      id: 3,
+      name: "Batata",
+      image: "img/Milk_shake.jpeg",
+    };
+
+    setFoods([...foods, food]);
+
+    buttonAdd.current.disabled = true;
+
+  };
   return (
-    <>
-    <div className="container">
-        <h1 className="mt-5 text-center">Menu</h1>
-    <div className="text-right">
-      <button
-      type="button"
-      className="btn btn-secondary rounded-cicle mr-4 font-weight-bold"
-      data-toggle="modal"
-      data-target="#formFoodModal">
-      +
-      </button>
-    </div>
-      <section className="card-deck my-3">
-      {foods.map((food) =>{
-          return <Food food={food} key={food.id} />
-      })}
-      </section>
+    <div className="Container">
+      <h1 className="mt-5 text-center">Menu</h1>
+      <div className="text-right">
+        <button
+          type="button"
+          className="btn btn-secondary rounded-circle mr-4 font-weight-bold"
+          data-toggle="modal"
+          data-target="#formFoodModal"
+          onClick={handleClick}
+          ref={buttonAdd}
+        >
+          +
+        </button>
       </div>
-    </>
+      <section className="card-deck my-3">
+        {foods.map((food) => (
+          <Food food={food} key={food.id} />
+        ))}
+      </section>
+    </div>
   );
 }
 
