@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react';
 import data from '../models/foods';
 import Food from './Food';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
 
 function App() {
   const [foods, setFoods] = useState(data);
